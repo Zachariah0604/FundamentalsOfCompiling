@@ -73,7 +73,7 @@ bool InputStr(char ch)
 		}
 		else
 		{
-			cout<<line_num++<<" "<<analy_top<<"->^"<<endl;
+			//cout<<line_num++<<" "<<analy_top<<"->^"<<endl;
 			analysis_Stack.data[analysis_Stack.top--]=NULL;
 		}
 		analy_top=analysis_Stack.data[analysis_Stack.top];
