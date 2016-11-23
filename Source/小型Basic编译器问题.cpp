@@ -53,7 +53,7 @@ void Let(Iden_list &iden_list,string sentence)
 	}
 	else
 	{
-		LNode *p=NULL,*vri1,*vri2;
+		LNode *p=NULL,*vri1=NULL,*vri2=NULL;
 		p=iden_list->next;
 		while (p)
 		{
@@ -63,7 +63,12 @@ void Let(Iden_list &iden_list,string sentence)
 				vri2=p;
 			p=p->next;
 		}
-		s->data=vri1->data+vri2->data;
+		if(!vri1)
+			s->data=vri2->data;
+		else if(!vri2)
+			s->data=vri1->data;
+		else
+			s->data=vri1->data+vri2->data;
 		if(flag)
 		{
 			s->next=iden_list->next;
@@ -76,15 +81,19 @@ void Print(Iden_list &iden_list,string sentence)
 	char temp=sentence.at(0);
 	LNode *p=NULL;
 	p=iden_list->next;
+	int flag=0;
 	while (p)
 	{
 		if(p->iden==temp)
 		{
 			cout<<p->iden<<"="<<p->data<<endl;
+			flag=1;
 			break;
 		}
 		p=p->next;
 	}
+	if(!flag)
+		cout<<temp<<"=0"<<endl;
 }
 bool If(Iden_list &iden_list,string sentence)
 {
@@ -228,7 +237,7 @@ int main(int argv,char *argc[])
 		}
 		else if(TiB[i]->key_word=="STOP")
 		{
-			beginline=i+1;
+			break;
 		}
 	}
 	//}
